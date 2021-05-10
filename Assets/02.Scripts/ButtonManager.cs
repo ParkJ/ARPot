@@ -5,8 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
-    
+    public GameObject ShipGroup;
+
     public void OnBuyButtonClick()
+    {
+        ShipGroup.SetActive(true);
+        Invoke("SceneChange", 3.0f);
+    }
+
+    void SceneChange()
     {
         SceneManager.LoadScene("ARScene");
     }
