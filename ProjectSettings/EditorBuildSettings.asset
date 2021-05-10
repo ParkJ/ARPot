@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/01.Scenes/PurchasingScene.unity
+    guid: 068cb49f6c88cda479db2c803864b86a
   m_configObjects: {}
