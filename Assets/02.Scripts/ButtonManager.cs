@@ -8,8 +8,6 @@ public class ButtonManager : MonoBehaviour
 {
     public GameObject ShipGroup;
 
-    public GameObject aminCharObj;
-
     public Image targetPanel;
 
     private Camera arCam;
@@ -21,7 +19,6 @@ public class ButtonManager : MonoBehaviour
     private Vector2 camCenterPos;
 
     private Color tpColor;
-
 
 
     public void Start()
@@ -36,6 +33,8 @@ public class ButtonManager : MonoBehaviour
     {
         OnTargetSearchButtonClick();
     }
+
+
 
     public void OnBuyButtonClick()
     {
@@ -61,13 +60,8 @@ public class ButtonManager : MonoBehaviour
 
     public void OnGrowthClick()
     {
-
     }
 
-    public void OnAnimClick()
-    {
-        aminCharObj.SetActive(false);
-    }
 
     public void OnVuTargetFound(GameObject newTarget)
     {
@@ -139,11 +133,11 @@ public class ButtonManager : MonoBehaviour
     {
         if(isSelected)
         {
-            obj.transform.Find("Canvas").transform.Find("Panel").GetComponent<Image>().color = new Color(this.tpColor.r, this.tpColor.g, this.tpColor.b, this.tpColor.a);
+            obj.transform.Find("Canvas").transform.Find("Panel").GetComponent<Image>().color = new Color(this.tpColor.r, this.tpColor.g, this.tpColor.b, 0.5f);
         }
         else
         {
-            obj.transform.Find("Canvas").transform.Find("Panel").GetComponent<Image>().color = new Color(this.tpColor.r, this.tpColor.g, this.tpColor.b, 60);
+            obj.transform.Find("Canvas").transform.Find("Panel").GetComponent<Image>().color = new Color(this.tpColor.r, this.tpColor.g, this.tpColor.b, this.tpColor.a);
         }
     }
 }
