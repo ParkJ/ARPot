@@ -5,8 +5,12 @@ using ArduinoBluetoothAPI;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour {
+
+	//Singleton
+	public static Manager instance;
 
 	// Use this for initialization
 	BluetoothHelper bluetoothHelper;
@@ -22,6 +26,9 @@ public class Manager : MonoBehaviour {
 	[SerializeField]
 	Button Btn_Disconnect;
 
+	[SerializeField]
+	Button EnterApp;
+
 	public Text Txt_Door;
 
 	string received_message;
@@ -32,6 +39,17 @@ public class Manager : MonoBehaviour {
 	// Manager.onDoorClose.AddListener(OnDoorClose);
 	//===============================================
 	public UnityEvent onDoorOpen, onDoorClose;
+
+	void Awake()
+	{
+		if(instance)
+		{
+			Destroy(gameObject);
+			return;
+		}
+		instance = this;
+		DontDestroyOnLoad(gameObject);
+	}
 
 	void Start () {
 		Btn_Connect.onClick.AddListener (() => {
@@ -177,5 +195,10 @@ public class Manager : MonoBehaviour {
 		foreach (string mylog in myLogQueue) {
 			myLog += mylog;
 		}
+	}
+
+	public void OnEnterApp()
+	{
+		SceneManager.LoadScene("PurchasingScene");
 	}
 }
