@@ -10,6 +10,8 @@ public class ButtonManager : MonoBehaviour
 
     public GameObject aminCharObj;
 
+    public Image targetPanel;
+
     private Camera arCam;
 
     private List<GameObject> targetObjList = new List<GameObject>();
@@ -18,12 +20,15 @@ public class ButtonManager : MonoBehaviour
 
     private Vector2 camCenterPos;
 
+    private Color tpColor;
+
 
 
     public void Start()
     {
         arCam = Camera.main;
         camCenterPos = new Vector2(Screen.width/2, Screen.height/2);
+        tpColor = targetPanel.color;
 
     }
 
@@ -114,19 +119,31 @@ public class ButtonManager : MonoBehaviour
             if(!this.selectedTarget)
             {
                 this.selectedTarget = nearestTarget;
-                this.selectedTarget.transform.Find("Canvas").transform.Find("Panel - Bold").GetComponent<Image>().enabled = true;
+                SetSelectedTargetColor(this.selectedTarget, true);
             }
             else if(this.selectedTarget.name != nearestTarget.name)
             {
-                this.selectedTarget.transform.Find("Canvas").transform.Find("Panel - Bold").GetComponent<Image>().enabled = false;
+                SetSelectedTargetColor(this.selectedTarget, false);
                 this.selectedTarget = nearestTarget;
-                this.selectedTarget.transform.Find("Canvas").transform.Find("Panel - Bold").GetComponent<Image>().enabled = true;
+                SetSelectedTargetColor(this.selectedTarget, true);
             }
         }
         else if(this.selectedTarget)
         {
-            this.selectedTarget.transform.Find("Canvas").transform.Find("Panel - Bold").GetComponent<Image>().enabled = false;
+            SetSelectedTargetColor(this.selectedTarget, false);
             this.selectedTarget = null;
+        }
+    }
+
+    void SetSelectedTargetColor(GameObject obj, bool isSelected)
+    {
+        if(isSelected)
+        {
+            obj.transform.Find("Canvas").transform.Find("Panel").GetComponent<Image>().color = new Color(this.tpColor.r, this.tpColor.g, this.tpColor.b, this.tpColor.a);
+        }
+        else
+        {
+            obj.transform.Find("Canvas").transform.Find("Panel").GetComponent<Image>().color = new Color(this.tpColor.r, this.tpColor.g, this.tpColor.b, 60);
         }
     }
 }
