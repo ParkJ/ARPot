@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
     public GameObject ShipGroup;
-    public GameObject flowerCharPref;
+
+    public GameObject aminCharObj;
+
+    private Camera arCam;
 
     private List<GameObject> targetObjList = new List<GameObject>();
 
@@ -14,9 +18,18 @@ public class ButtonManager : MonoBehaviour
 
     private Vector2 camCenterPos;
 
+
+
     public void Start()
     {
-        camCenterPos = new Vector2(Screen.width/2, Screen.height);
+        arCam = Camera.main;
+        camCenterPos = new Vector2(Screen.width/2, Screen.height/2);
+
+    }
+
+    public void Update()
+    {
+        OnTargetSearchButtonClick();
     }
 
     public void OnBuyButtonClick()
@@ -48,14 +61,7 @@ public class ButtonManager : MonoBehaviour
 
     public void OnAnimClick()
     {
-    //     if(flowerCharPref.activeSelf)
-    //     {
-    //         flowerCharPref.SetActive(false);
-    //     }
-    //     else
-    //     {
-    //         flowerCharPref.SetActive(true);
-    //     }
+        aminCharObj.SetActive(false);
     }
 
     public void OnVuTargetFound(GameObject newTarget)
@@ -74,13 +80,53 @@ public class ButtonManager : MonoBehaviour
         }
     }
 
-    public void SearchTargetInArea()
+    public void OnTargetSearchButtonClick()
     {
-        GameObject nearestObject;
+        GameObject nearestTarget = SearchTargetInArea();
+        SelectedTargetUpdate(nearestTarget);
+    }
 
+    GameObject SearchTargetInArea()
+    {
+        GameObject nearestTarget = null;
+
+        float minDist = 987654321;
         foreach(var obj in targetObjList)
         {
-            Debug.Log(obj.name);
+            Vector3 objScreenPos = arCam.WorldToScreenPoint(obj.transform.position);
+            Vector2 objectXYPos = new Vector2(objScreenPos.x, objScreenPos.y);
+
+            float curDist = Vector2.Distance(camCenterPos, objectXYPos);
+
+            if(minDist > curDist)
+            {
+                nearestTarget = obj;
+                minDist = curDist;
+            }
+        }
+        return nearestTarget;
+    }
+
+    void SelectedTargetUpdate(GameObject nearestTarget)
+    {
+        if(nearestTarget)
+        {
+            if(!this.selectedTarget)
+            {
+                this.selectedTarget = nearestTarget;
+                this.selectedTarget.transform.Find("Canvas").transform.Find("Panel - Bold").GetComponent<Image>().enabled = true;
+            }
+            else if(this.selectedTarget.name != nearestTarget.name)
+            {
+                this.selectedTarget.transform.Find("Canvas").transform.Find("Panel - Bold").GetComponent<Image>().enabled = false;
+                this.selectedTarget = nearestTarget;
+                this.selectedTarget.transform.Find("Canvas").transform.Find("Panel - Bold").GetComponent<Image>().enabled = true;
+            }
+        }
+        else if(this.selectedTarget)
+        {
+            this.selectedTarget.transform.Find("Canvas").transform.Find("Panel - Bold").GetComponent<Image>().enabled = false;
+            this.selectedTarget = null;
         }
     }
 }
