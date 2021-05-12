@@ -5,13 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+<<<<<<< HEAD
   - enabled: 1
     path: Assets/01.Scenes/PurchasingScene.unity
     guid: 068cb49f6c88cda479db2c803864b86a
   - enabled: 1
     path: Assets/01.Scenes/UIScene.unity
     guid: 1fc3322aa92a3fa46b8b86561ffbce80
+=======
+  - enabled: 0
+    path: Assets/01.Scenes/BTConnect.unity
+    guid: 310e43daedb32bb4799bfec5908d24be
+  - enabled: 1
+    path: Assets/01.Scenes/PurchasingScene.unity
+    guid: 068cb49f6c88cda479db2c803864b86a
+>>>>>>> 3d6523d769b09058dc24da9e8f5650aa315ae12b
   - enabled: 1
     path: Assets/01.Scenes/ARScene.unity
     guid: a55fb01783eade34ab0bb61f7c9783d0
+  - enabled: 1
+    path: Assets/01.Scenes/UIScene.unity
+    guid: 1fc3322aa92a3fa46b8b86561ffbce80
   m_configObjects: {}

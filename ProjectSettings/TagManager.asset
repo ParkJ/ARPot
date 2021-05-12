@@ -6,11 +6,12 @@ TagManager:
   tags:
   - PANEL-MENUBTN
   - PANEL-MENUBACK
+  - BOLD
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PostProcessing
   - Water
   - UI
   - 
