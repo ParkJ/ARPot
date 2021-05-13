@@ -12,13 +12,20 @@ public class UIButtonManager : MonoBehaviour
 
     public GameObject growthSliderObj;
 
+    private GameObject arManager;
+
+
     public void Start()
     {
+
         menu = GameObject.FindWithTag("PANEL-MENUBTN");
         menuDetail = GameObject.FindWithTag("PANEL-MENUBACK");
 
         menu.SetActive(state);
         menuDetail.SetActive(!state);
+
+        arManager = GameObject.FindGameObjectWithTag("ARManager");
+
     }
 
     public void OnTouchMenu()
@@ -37,5 +44,11 @@ public class UIButtonManager : MonoBehaviour
     public void OnGrowthButtonClick()
     {
         growthSliderObj.SetActive(!growthSliderObj.activeSelf);
+    }
+
+
+    public void OnGrowthSliderChanged(GameObject slider)
+    {
+        arManager.GetComponent<ARButtonManager>().OnGrowthSliderChanged(slider);
     }
 }

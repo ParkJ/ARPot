@@ -1269,6 +1269,34 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8570135361323516133, guid: 873da164fe532744e9bbd5b5b1475bb9, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570135361323516133, guid: 873da164fe532744e9bbd5b5b1475bb9, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1578295626}
+    - target: {fileID: 8570135361323516133, guid: 873da164fe532744e9bbd5b5b1475bb9, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570135361323516133, guid: 873da164fe532744e9bbd5b5b1475bb9, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnGrowthSliderChanged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570135361323516133, guid: 873da164fe532744e9bbd5b5b1475bb9, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIButtonManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570135361323516133, guid: 873da164fe532744e9bbd5b5b1475bb9, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1682186236}
+    - target: {fileID: 8570135361323516133, guid: 873da164fe532744e9bbd5b5b1475bb9, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8570135361323516134, guid: 873da164fe532744e9bbd5b5b1475bb9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

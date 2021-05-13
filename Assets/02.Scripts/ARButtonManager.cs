@@ -19,8 +19,7 @@ public class ARButtonManager : MonoBehaviour
 
     private Color tpColor;
 
-
-
+    
     void Start()
     {
         arCam = Camera.main;
@@ -122,10 +121,12 @@ public class ARButtonManager : MonoBehaviour
     {
         if(selectedTarget)
         {
+            Debug.Log("target true");
             float value = slider.GetComponent<Slider>().value;
             Image[] images = selectedTarget.transform.Find("Canvas").transform.Find("GrowingImgGroup").GetComponentsInChildren<Image>();
             GrowthImageTransparency(images, value);
         }
+        Debug.Log("target false");
     }
 
     void GrowthImageTransparency(Image[] images, float value)
