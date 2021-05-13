@@ -151,32 +151,50 @@ public class ARButtonManager : MonoBehaviour
     {
         Color imgColor;
 
+        if(value == 0)
+        {
+            imgColor = images[0].color;
+            images[0].color = new Color(imgColor.r, imgColor.g, imgColor.b, 0);
+            imgColor = images[1].color;
+            images[1].color = new Color(imgColor.r, imgColor.g, imgColor.b, 0);
+            imgColor = images[2].color;
+            images[2].color = new Color(imgColor.r, imgColor.g, imgColor.b, 0);
+        }
         if(value > 0 && value <= 1)
         {
-            imgColor = images[1].color;
+            imgColor = images[0].color;
             imgColor = new Color(imgColor.r, imgColor.g, imgColor.b, 1.0f - value);
-            images[1].color = imgColor;
+            images[0].color = imgColor;
         }
 
         if(value > 0.5 && value <= 1)
         {
-            imgColor = images[2].color;
+            imgColor = images[1].color;
             imgColor = new Color(imgColor.r, imgColor.g, imgColor.b, (value - 0.5f)*2.0f);
-            images[2].color = imgColor;
+            images[1].color = imgColor;
         }
 
         if(value > 1 && value <= 1.5)
         {
-            imgColor = images[2].color;
+            imgColor = images[1].color;
             imgColor = new Color(imgColor.r, imgColor.g, imgColor.b, 3.0f - (2.0f * value));
-            images[2].color = imgColor;
+            images[1].color = imgColor;
         }
 
-        if(value > 1 && value <= 2)
+        if(value > 1 && value < 2)
         {
-            imgColor = images[3].color;
+            imgColor = images[2].color;
             imgColor = new Color(imgColor.r, imgColor.g, imgColor.b, value - 1);
-            images[3].color = imgColor;
+            images[2].color = imgColor;
+        }
+        if(value == 2)
+        {
+            imgColor = images[0].color;
+            images[0].color = new Color(imgColor.r, imgColor.g, imgColor.b, 0);
+            imgColor = images[1].color;
+            images[1].color = new Color(imgColor.r, imgColor.g, imgColor.b, 0);
+            imgColor = images[2].color;
+            images[2].color = new Color(imgColor.r, imgColor.g, imgColor.b, 1);
         }
     }
 #endregion  
