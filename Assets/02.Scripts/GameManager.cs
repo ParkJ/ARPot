@@ -11,22 +11,24 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-// Use this for initialization
+    // Use this for initialization
     BluetoothHelper bluetoothHelper;
     string deviceName;
     string received_message;
     private string tmp;
 
-void Awake()
-	{
-		if(instance)
-		{
-			Destroy(gameObject);
-			return;
-		}
-		instance = this;
-		DontDestroyOnLoad(gameObject);
-	}
+    public bool isWet = false;
+
+    void Awake()
+    {
+        if (instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     void Start()
     {
 
@@ -42,7 +44,7 @@ void Awake()
 
             bluetoothHelper.setTerminatorBasedStream("\n");
 
-            if(!bluetoothHelper.ScanNearbyDevices())
+            if (!bluetoothHelper.ScanNearbyDevices())
             {
                 //scan didnt start (on windows desktop (not UWP))
                 //try to connect
@@ -60,14 +62,32 @@ void Awake()
 
     private void write(string msg)
     {
-        tmp += ">"+ msg + "\n";
+        tmp += ">" + msg + "\n";
     }
 
     void OnMessageReceived()
     {
         received_message = bluetoothHelper.Read();
         Debug.Log(received_message);
-        write("Received : " +received_message);
+        write( received_message);
+
+        if (received_message.Contains("ON")) 
+        {
+            isWet = true;
+            Debug.Log("true");
+        }
+        else if (received_message.Contains("OFF")) 
+        {
+            isWet = false;
+            Debug.Log("false");
+        }
+        else
+        {
+            Debug.Log("Error");
+
+        }
+        Debug.Log($"isWet? : {isWet}");
+
     }
 
     void OnConnected()
@@ -84,9 +104,10 @@ void Awake()
         }
     }
 
-    void OnScanEnded(LinkedList<BluetoothDevice> devices){
+    void OnScanEnded(LinkedList<BluetoothDevice> devices)
+    {
 
-        if(bluetoothHelper.isDevicePaired()) //we did found our device (with BLE) or we already paired the device (for Bluetooth Classic)
+        if (bluetoothHelper.isDevicePaired()) //we did found our device (with BLE) or we already paired the device (for Bluetooth Classic)
             bluetoothHelper.Connect();
         else
             bluetoothHelper.ScanNearbyDevices(); //we didn't
@@ -140,9 +161,9 @@ void Awake()
     //             bluetoothHelper.SendData("2");
     //             write("Sending 2");
     //         }
-            
+
     //     }
-            
+
     // }
 
     void OnDestroy()
