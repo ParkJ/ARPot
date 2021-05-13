@@ -601,8 +601,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.68, y: 0.98}
-  m_SizeDelta: {x: 4.2369, y: 9.9332}
+  m_AnchoredPosition: {x: -7.48, y: 1.24}
+  m_SizeDelta: {x: 5.9012, y: 9.4289}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &245445593
 MonoBehaviour:
@@ -624,7 +624,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 45157ff277a660146b9a257a4ea49797, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6c985efe7fb908848a739898e747bc60, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1841,8 +1841,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.04, y: 1.557}
-  m_SizeDelta: {x: 4.7829, y: 11.1032}
+  m_AnchoredPosition: {x: -7.6029, y: 3.0446}
+  m_SizeDelta: {x: 6.4293, y: 12.9956}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &845407513
 MonoBehaviour:
@@ -1864,7 +1864,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d9941c44d1777b9449cebf923684f709, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0c3056f7166e2094b83c4b97ba9c80ac, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2272,8 +2272,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.87, y: -0.97}
-  m_SizeDelta: {x: 1.4061, y: 6.018}
+  m_AnchoredPosition: {x: -8.72, y: -0.94}
+  m_SizeDelta: {x: 5.7069, y: 5.2742}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1073286386
 MonoBehaviour:
@@ -2288,14 +2288,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.9490196}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3bd4784a56d1e934a8dbdb90aee855bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5b76dc79eefff6947bb5f6234f4efe1e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3351,7 +3351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1887178776}
   m_Layer: 0
-  m_Name: GrowingImgGroup (1)
+  m_Name: GrowingImgGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
