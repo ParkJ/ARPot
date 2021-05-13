@@ -33,24 +33,6 @@ public class ARButtonManager : MonoBehaviour
         TargetSearch();
     }
 
-#region BUTTON
-
-    public void OnInfoClick()
-    {
-        
-    }
-
-    public void OnCaptureClick()
-    {
-
-    }
-
-    public void OnGrowthClick()
-    {
-
-    }
-#endregion
-
 #region TARGETING
     public void OnVuTargetFound(GameObject newTarget)
     {
@@ -67,8 +49,6 @@ public class ARButtonManager : MonoBehaviour
             targetObjList.Remove(oldTarget);
         }
     }
-
-
 
     void TargetSearch()
     {
@@ -106,6 +86,7 @@ public class ARButtonManager : MonoBehaviour
                 this.selectedTarget = nearestTarget;
                 SetSelectedTargetColor(this.selectedTarget, true);
             }
+            //When selection changed
             else if(this.selectedTarget.name != nearestTarget.name)
             {
                 SetSelectedTargetColor(this.selectedTarget, false);

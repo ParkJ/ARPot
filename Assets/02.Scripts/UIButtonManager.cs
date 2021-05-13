@@ -9,6 +9,9 @@ public class UIButtonManager : MonoBehaviour
     private GameObject menu;
     private GameObject menuDetail;
 
+
+    public GameObject growthSliderObj;
+
     public void Start()
     {
         menu = GameObject.FindWithTag("PANEL-MENUBTN");
@@ -28,6 +31,11 @@ public class UIButtonManager : MonoBehaviour
     {
         menu.SetActive(state);
         menuDetail.SetActive(!state);
+        growthSliderObj.SetActive(false);
     }
-   
+    
+    public void OnGrowthButtonClick()
+    {
+        growthSliderObj.SetActive(!growthSliderObj.activeSelf);
+    }
 }
