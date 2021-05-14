@@ -8,6 +8,19 @@ public class UIButtonManager : MonoBehaviour
     private bool state = true;
     private GameObject menu;
     private GameObject menuDetail;
+    [SerializeField]
+    private GameObject SNSPanel;
+    
+    //Menu Button Group
+    [SerializeField]
+    private GameObject Btn_Back;
+    [SerializeField]
+    private GameObject Btn_Capture;
+    [SerializeField]
+    private GameObject Btn_GrowSlider;
+    [SerializeField]
+    private GameObject Btn_Detail;
+
 
 
     public GameObject growthSliderObj;
@@ -23,6 +36,8 @@ public class UIButtonManager : MonoBehaviour
 
         menu.SetActive(state);
         menuDetail.SetActive(!state);
+        SNSPanel.SetActive(false);
+        growthSliderObj.SetActive(false);
 
         arManager = GameObject.FindGameObjectWithTag("ARManager");
 
@@ -44,6 +59,25 @@ public class UIButtonManager : MonoBehaviour
     public void OnGrowthButtonClick()
     {
         growthSliderObj.SetActive(!growthSliderObj.activeSelf);
+    }
+
+    public void OnTouchCapture()
+    {
+        Btn_Back.GetComponent<Button>().interactable = false;
+        Btn_Capture.GetComponent<Button>().interactable = false;
+        Btn_GrowSlider.GetComponent<Button>().interactable = false;
+        Btn_Detail.GetComponent<Button>().interactable = false;
+
+        SNSPanel.SetActive(true);        
+    }
+    public void OnTouchSNSCancel()
+    {
+        Btn_Back.GetComponent<Button>().interactable = true;
+        Btn_Capture.GetComponent<Button>().interactable = true;
+        Btn_GrowSlider.GetComponent<Button>().interactable = true;
+        Btn_Detail.GetComponent<Button>().interactable = true;
+
+        SNSPanel.SetActive(false);        
     }
 
 
