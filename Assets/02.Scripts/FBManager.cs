@@ -28,12 +28,13 @@ public class FBManager : MonoBehaviour
     void Start()
     {
         reference = FirebaseDatabase.DefaultInstance.GetReference("Info");
-        LoadData();
     }
 
-    public void LoadData()
+
+
+    public void LoadData(string code)
     {
-        Query targetQuery = reference.OrderByChild("code").EqualTo("ImageTarget - Leaf1");
+        Query targetQuery = reference.OrderByChild("code").EqualTo(code);
 
         targetQuery.ValueChanged += OnDataLoaded;
     }

@@ -84,6 +84,8 @@ public class ARButtonManager : MonoBehaviour
             {
                 this.selectedTarget = nearestTarget;
                 SetSelectedTargetColor(this.selectedTarget, true);
+
+                GameObject.FindGameObjectWithTag("GAMEMANAGER").GetComponent<FBManager>().LoadData(this.selectedTarget.name);
             }
             //When selection changed
             else if(this.selectedTarget.name != nearestTarget.name)
@@ -91,6 +93,8 @@ public class ARButtonManager : MonoBehaviour
                 SetSelectedTargetColor(this.selectedTarget, false);
                 this.selectedTarget = nearestTarget;
                 SetSelectedTargetColor(this.selectedTarget, true);
+
+                GameObject.FindGameObjectWithTag("GAMEMANAGER").GetComponent<FBManager>().LoadData(this.selectedTarget.name);
             }
         }
         else if(this.selectedTarget)
