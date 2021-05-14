@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIButtonManager : MonoBehaviour
 {
@@ -22,10 +23,16 @@ public class UIButtonManager : MonoBehaviour
     private GameObject Btn_Detail;
 
 
+    private GameObject arManager;
 
     public GameObject growthSliderObj;
 
-    private GameObject arManager;
+    public GameObject DetailPanel;
+
+
+
+
+    public TMP_Text[] componentTexts;
 
 
     public void Start()
@@ -80,6 +87,42 @@ public class UIButtonManager : MonoBehaviour
         SNSPanel.SetActive(false);        
     }
 
+    public void OnInfoButtonClick()
+    {
+        SetDetailPanelData();
+
+        DetailPanel.SetActive(true);
+
+    }
+
+    public void OnDetailExit()
+    {
+        Debug.Log("OnClick");
+        DetailPanel.SetActive(false);
+    }
+
+    bool SetDetailPanelData()
+    {
+        IDictionary data = GameObject.FindGameObjectWithTag("GAMEMANAGER").GetComponent<FBManager>().iTargetDataDict;
+
+        if(data == null)
+        {
+            Debug.Log("SetDetailPanelData fail");
+            return false;
+        }
+
+        componentTexts[0].text = (string)data["식재시기"] + "\n" + (string)data["개화시기"];
+        componentTexts[1].text = (string)data["최적온도"] + "\n" + (string)data["월동온도"];
+        componentTexts[2].text = (string)data["키"] + "\n" + (string)data["꽃크기"];
+        componentTexts[3].text = (string)data["물주기"];
+        componentTexts[4].text = (string)data["환경조건"] + "\n" + (string)data["난이도"];
+        componentTexts[5].text = (string)data["용도"] + "\n" + (string)data["분류"];
+
+        componentTexts[6].text = (string)data["재배포인트"];
+
+        return true;
+
+    }
 
     public void OnGrowthSliderChanged(GameObject slider)
     {

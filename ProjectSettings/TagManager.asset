@@ -8,6 +8,7 @@ TagManager:
   - PANEL-MENUBACK
   - BOLD
   - ARManager
+  - GAMEMANAGER
   layers:
   - Default
   - TransparentFX
