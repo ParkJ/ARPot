@@ -80,9 +80,39 @@ public class UIButtonManager : MonoBehaviour
         SNSPanel.SetActive(false);        
     }
 
+    public void OnInfoButtonClick()
+    {
+        IDictionary data = GameObject.FindGameObjectWithTag("GAMEMANAGER").GetComponent<FBManager>().iTargetDataDict;
+
+        if(data != null)
+        {
+            TargetInfo newTarget = new TargetInfo(data);
+            
+        }
+    }
+
 
     public void OnGrowthSliderChanged(GameObject slider)
     {
         arManager.GetComponent<ARButtonManager>().OnGrowthSliderChanged(slider);
+    }
+
+    public class TargetInfo
+    {
+        private string name;
+
+        public TargetInfo(IDictionary data)
+        {
+            this.name = (string)data["name"];
+        }
+
+        public string getInfoString()
+        {
+            string infoString = "";
+
+            infoString += $"name : {this.name} \n";
+
+            return infoString;
+        }
     }
 }
