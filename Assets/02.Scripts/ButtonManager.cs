@@ -16,6 +16,8 @@ public class ButtonManager : MonoBehaviour
 
     void SceneChange()
     {
-        SceneManager.LoadScene("ARScene");
+        SceneManager.LoadScene("UIScene");
+        SceneManager.LoadScene("ARScene", LoadSceneMode.Additive);
+
     }
 }

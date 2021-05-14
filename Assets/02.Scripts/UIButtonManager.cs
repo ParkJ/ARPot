@@ -97,6 +97,7 @@ public class UIButtonManager : MonoBehaviour
 
     public void OnDetailExit()
     {
+        Debug.Log("OnClick");
         DetailPanel.SetActive(false);
     }
 
