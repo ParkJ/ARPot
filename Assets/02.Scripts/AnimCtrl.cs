@@ -7,8 +7,9 @@ public class AnimCtrl : MonoBehaviour
     private Animator anim;
 
     private readonly int hashWaterOn = Animator.StringToHash("WaterOn");
-    
-    private bool isWaterEnough;
+
+    private bool isWet = false;
+    // private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -19,39 +20,36 @@ public class AnimCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         WaterStateCheck();
     }
 
 
     void WaterStateCheck()
     {
-        /* 
-        :::Later:::
-
-        if (BTManager.instance.isWaterEnough != this.isWaterEnough)
+        bool _isWet = GameManager.instance.isWet;
+        if(_isWet != this.isWet)
         {
-            this.isWaterEnough = BTManager.instance.isWaterEnough;
-            start coroutine AnimStateUpdate();
+            this.isWet = _isWet;
+            StartCoroutine(AnimStateUpdate());
         }
-        */ 
-
 
 
     }
     IEnumerator AnimStateUpdate()
     {
-        if(this.isWaterEnough)
+        if (this.isWet)
         {
             //Turn Anim hash bool On and Rendering turn off 
             anim.SetBool(hashWaterOn, true);
             yield return new WaitForSeconds(2.0f);
-            SetAnimRendererState(this.anim, !isWaterEnough);
+            SetAnimRendererState(this.anim, !isWet);
         }
         else
         {
             //Turn Anim hash bool Off and Rendering turn on.
             anim.SetBool(hashWaterOn, false);
-            SetAnimRendererState(this.anim, !isWaterEnough);
+            SetAnimRendererState(this.anim, !isWet);
         }
         yield break;
     }
@@ -61,11 +59,12 @@ public class AnimCtrl : MonoBehaviour
         anim.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = state;
     }
 
-    
 
-    public void OnAnimClick()
-    {
-        this.isWaterEnough = !this.isWaterEnough;
-        StartCoroutine(AnimStateUpdate());
-    }
+
+    // public void OnAnimClick()
+    // {
+    //     this.isWaterEnough = !this.isWaterEnough;
+    //     StartCoroutine(AnimStateUpdate());
+    // }
+
 }
