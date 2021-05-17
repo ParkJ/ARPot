@@ -19,7 +19,8 @@ public class ARButtonManager : MonoBehaviour
 
     private Color tpColor;
 
-    
+    private bool arTargetingState = true;
+
     void Start()
     {
         arCam = Camera.main;
@@ -49,10 +50,18 @@ public class ARButtonManager : MonoBehaviour
         }
     }
 
+    public void ARTargetingStateChanged(bool state)
+    {
+        this.arTargetingState = state;
+    }
+
     void TargetSearch()
     {
-        GameObject nearestTarget = SearchTargetInArea();
-        SelectedTargetUpdate(nearestTarget);
+        if(arTargetingState)
+        {
+            GameObject nearestTarget = SearchTargetInArea();
+            SelectedTargetUpdate(nearestTarget);
+        }
     }
 
     GameObject SearchTargetInArea()
