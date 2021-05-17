@@ -36,10 +36,11 @@ public class FBManager : MonoBehaviour
 
     public void LoadData(string code)
     {
-        Debug.Log("Load data On");
+        Debug.Log("Load data On" + code);
         
         Query targetQuery = reference.OrderByChild("code").EqualTo(code);
 
+        Debug.Log("After Load data On");
         targetQuery.ValueChanged += OnDataLoaded;
     }
 

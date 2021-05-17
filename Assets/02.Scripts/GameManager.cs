@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    // public static GameManager instance;
 
     // Use this for initialization
     BluetoothHelper bluetoothHelper;
@@ -19,16 +19,16 @@ public class GameManager : MonoBehaviour
 
     public bool isWet = false;
 
-    void Awake()
-    {
-        if (instance)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+    // void Awake()
+    // {
+    //     if (instance)
+    //     {
+    //         Destroy(gameObject);
+    //         return;
+    //     }
+    //     instance = this;
+    //     DontDestroyOnLoad(gameObject);
+    // }
     void Start()
     {
 
@@ -60,16 +60,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+//    void Update()
+//        {
+//            Debug.Log("WTF!!!!!!!");
+//        }
+   
+
     private void write(string msg)
     {
         tmp += ">" + msg + "\n";
     }
 
-    void OnMessageReceived()
+    public void OnMessageReceived()
     {
         received_message = bluetoothHelper.Read();
-        Debug.Log(received_message);
-        write( received_message);
+        // Debug.Log(received_message);
+        // Debug.Log("It's received_message!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        // write( received_message);
 
         if (received_message.Contains("ON")) 
         {
@@ -86,7 +93,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Error");
 
         }
-        Debug.Log($"isWet? : {isWet}");
+        Debug.Log($"GameMGRIsWet? : {isWet}");
 
     }
 
@@ -119,53 +126,53 @@ public class GameManager : MonoBehaviour
         Debug.Log("Connection Failed");
     }
 
+/* 
+    // Call this function to emulate message receiving from bluetooth while debugging on your PC.
+    void OnGUI()
+    {
+        GUIStyle myButtonStyle = new GUIStyle(GUI.skin.button);
+        myButtonStyle.fontSize = 40;
 
-    //Call this function to emulate message receiving from bluetooth while debugging on your PC.
-    // void OnGUI()
-    // {
-    //     GUIStyle myButtonStyle = new GUIStyle(GUI.skin.button);
-    //     myButtonStyle.fontSize = 40;
+        tmp = GUI.TextField(new Rect(Screen.width / 10, Screen.height /3 , Screen.width*0.8f , Screen.height / 3), tmp, myButtonStyle);
 
-    //     tmp = GUI.TextField(new Rect(Screen.width / 10, Screen.height /3 , Screen.width*0.8f , Screen.height / 3), tmp, myButtonStyle);
+        if (bluetoothHelper != null)
+            bluetoothHelper.DrawGUI();
+        else
+            return;
 
-    //     if (bluetoothHelper != null)
-    //         bluetoothHelper.DrawGUI();
-    //     else
-    //         return;
+        if (!bluetoothHelper.isConnected())
+            if (GUI.Button(new Rect(Screen.width / 2 - Screen.width / 10, Screen.height / 10, Screen.width / 5, Screen.height / 10), "Connect", myButtonStyle))
+            {
+                if (bluetoothHelper.isDevicePaired())
+                    bluetoothHelper.Connect(); // tries to connect
+                else
+                    write("Cannot connect, device is not found, for bluetooth classic, pair the device\n\tFor BLE scan for nearby devices");
+            }  
 
-    //     if (!bluetoothHelper.isConnected())
-    //         if (GUI.Button(new Rect(Screen.width / 2 - Screen.width / 10, Screen.height / 10, Screen.width / 5, Screen.height / 10), "Connect", myButtonStyle))
-    //         {
-    //             if (bluetoothHelper.isDevicePaired())
-    //                 bluetoothHelper.Connect(); // tries to connect
-    //             else
-    //                 write("Cannot connect, device is not found, for bluetooth classic, pair the device\n\tFor BLE scan for nearby devices");
-    //         }  
+        if (bluetoothHelper.isConnected())
+        {
+            if (GUI.Button(new Rect(Screen.width / 2 - Screen.width / 10, Screen.height - 2 * Screen.height / 10, Screen.width / 5, Screen.height / 10), "Disconnect", myButtonStyle))
+            {
+                bluetoothHelper.Disconnect();
+                write("Disconnected");
+            }
 
-    //     if (bluetoothHelper.isConnected())
-    //     {
-    //         if (GUI.Button(new Rect(Screen.width / 2 - Screen.width / 10, Screen.height - 2 * Screen.height / 10, Screen.width / 5, Screen.height / 10), "Disconnect", myButtonStyle))
-    //         {
-    //             bluetoothHelper.Disconnect();
-    //             write("Disconnected");
-    //         }
+            if (GUI.Button(new Rect(Screen.width / 2 - Screen.width / 4, Screen.height / 10, Screen.width / 5, Screen.height / 10), "Turn On", myButtonStyle))
+            {
+                bluetoothHelper.SendData("1");
+                write("Sending 1");
+            }
 
-    //         if (GUI.Button(new Rect(Screen.width / 2 - Screen.width / 4, Screen.height / 10, Screen.width / 5, Screen.height / 10), "Turn On", myButtonStyle))
-    //         {
-    //             bluetoothHelper.SendData("1");
-    //             write("Sending 1");
-    //         }
+            if (GUI.Button(new Rect(Screen.width / 2 + Screen.width / 10, Screen.height / 10, Screen.width / 5, Screen.height / 10), "Turn Off" , myButtonStyle))
+            {
+                bluetoothHelper.SendData("2");
+                write("Sending 2");
+            }
 
-    //         if (GUI.Button(new Rect(Screen.width / 2 + Screen.width / 10, Screen.height / 10, Screen.width / 5, Screen.height / 10), "Turn Off" , myButtonStyle))
-    //         {
-    //             bluetoothHelper.SendData("2");
-    //             write("Sending 2");
-    //         }
+        }
 
-    //     }
-
-    // }
-
+    }
+ */
     void OnDestroy()
     {
         if (bluetoothHelper != null)
