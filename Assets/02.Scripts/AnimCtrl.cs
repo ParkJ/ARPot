@@ -56,9 +56,8 @@ public class AnimCtrl : MonoBehaviour
 
     void SetAnimRendererState(Animator anim, bool state)
     {
-        anim.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = state;
+        anim.gameObject.SetActive(state);
     }
-
 
 
     // public void OnAnimClick()

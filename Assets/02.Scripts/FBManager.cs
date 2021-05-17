@@ -25,9 +25,11 @@ public class FBManager : MonoBehaviour
         FirebaseApp app = FirebaseApp.Create(options);
     }
 
-    void Start()
+    IEnumerator Start()
     {
         reference = FirebaseDatabase.DefaultInstance.GetReference("Info");
+
+        yield return new WaitForSeconds(1.0f);
     }
 
 
