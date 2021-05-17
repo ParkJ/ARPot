@@ -46,6 +46,7 @@ public class FBManager : MonoBehaviour
         {
             iTargetDataDict = (IDictionary)data.Value;
         }
+        Debug.Log("Data Loaded");
     }
 }
 

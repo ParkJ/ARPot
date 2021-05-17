@@ -81,6 +81,7 @@ public class UIButtonManager : MonoBehaviour
             Btn_Back.GetComponent<Button>().interactable = true;
             Btn_Capture.GetComponent<Button>().interactable = true;
             Btn_Detail.GetComponent<Button>().interactable = true; 
+            growthSliderObj.GetComponent<Slider>().value = 0;
         }
         growthSliderObj.SetActive(!growthSliderObj.activeSelf);
     }
