@@ -33,11 +33,6 @@ public class UIButtonManager : MonoBehaviour
 
     public TMP_Text[] componentTexts;
 
-    private bool arTargetingState = true;
-
-
-    private bool isUIButtonClicked;
-
     public void Start()
     {
 
@@ -53,31 +48,43 @@ public class UIButtonManager : MonoBehaviour
 
         arManager.GetComponent<ARButtonManager>().SelectOn += new EventHandler(SelectOn);
         arManager.GetComponent<ARButtonManager>().SelectOff += new EventHandler(SelectOff);
+        arManager.GetComponent<ARButtonManager>().TargetLost += new EventHandler(UIBackToDefault);
+
+        // default state : false
+        SetInteractable(false);
     }
 
+    //Event : Called if Target selected.
     void SelectOn(object sender, EventArgs e)
     {
-
         SetInteractable(true);
     }
+    //Event : Called if there's no selected target.
     void SelectOff(object sender, EventArgs e)
     {
         growthSliderObj.GetComponent<Slider>().value = 0;
         growthSliderObj.SetActive(false);
         SetInteractable(false);
     }
-
-    void Update()
+    //Event : Called if selected target lost.
+    void UIBackToDefault(object sender, EventArgs args)
     {
-        ARTargetingValidCheck();
+        DetailPanel.SetActive(false);
+        growthSliderObj.SetActive(false);
+        growthSliderObj.GetComponent<Slider>().value = 0;
+        SNSPanel.SetActive(false);
+        menuDetail.SetActive(true);
+        SetARTargetingState(true);
     }
-
+#region Button
+    
+    // Menu on
     public void OnTouchMenu()
     {
         menu.SetActive(!state);
         menuDetail.SetActive(state);
     }
-
+    //Menu off
     public void OnTouchMenuBack()
     {
         menu.SetActive(state);
@@ -86,55 +93,68 @@ public class UIButtonManager : MonoBehaviour
 
     }
     
-    public void OnGrowthButtonClick()
+    // Info Button Clicked.
+    public void OnInfoButtonClick()
     {
-        if(!growthSliderObj.activeSelf)
-        {
-            Btn_Back.GetComponent<Button>().interactable = false;
-            Btn_Capture.GetComponent<Button>().interactable = false;
-            Btn_Detail.GetComponent<Button>().interactable = false; 
-        }
-        else
-        {
-            Btn_Back.GetComponent<Button>().interactable = true;
-            Btn_Capture.GetComponent<Button>().interactable = true;
-            Btn_Detail.GetComponent<Button>().interactable = true; 
-            growthSliderObj.GetComponent<Slider>().value = 0;
-        }
-        growthSliderObj.SetActive(!growthSliderObj.activeSelf);
+        // set AR targeting state false
+        SetARTargetingState(false);
+
+        // get data from firebase;
+        SetDetailPanelData();
+        // disable menu and enable info
+        menuDetail.SetActive(false);
+        DetailPanel.SetActive(true);
     }
 
+    // Growth Button clicked.
+    public void OnGrowthButtonClick()
+    {
+        // set AR targeting state false
+        SetARTargetingState(false);
+
+        menuDetail.SetActive(false);
+        growthSliderObj.SetActive(true);
+    }
+
+    // Growth slider changed.
     public void OnGrowthSliderChanged(GameObject slider)
     {
         arManager.GetComponent<ARButtonManager>().OnGrowthSliderChanged(slider);
     }
 
-    public void OnTouchCapture()
+    // Capture Button Clicked.
+    public void OnCaptureButtonClick()
     {
+        // set AR targeting state false
+        SetARTargetingState(false);
 
-        SetInteractable(false);
-        SNSPanel.SetActive(true);        
+        menuDetail.SetActive(false);
+        SNSPanel.SetActive(true);   
     }
+
+    // SNS Share cancel clicked.
     public void OnTouchSNSCancel()
     {
-        SetInteractable(true);
+        menuDetail.SetActive(true);
         SNSPanel.SetActive(false);        
     }
 
-    public void OnInfoButtonClick()
-    {
-        SetInteractable(false);
-        SetDetailPanelData();
-        DetailPanel.SetActive(true);
 
+    // Exit button clicked.
+    public void OnExitButtonClick(GameObject targetUIObj)
+    {
+        
+        // set AR targeting state true
+        SetARTargetingState(true);
+        
+        growthSliderObj.GetComponent<Slider>().value = 0;
+        targetUIObj.SetActive(false);
+        menuDetail.SetActive(true);
     }
 
-    public void OnDetailExit()
-    {
-        SetInteractable(true);
-        DetailPanel.SetActive(false);
-    }
 
+
+#endregion
 
     bool SetDetailPanelData()
     {
@@ -159,36 +179,13 @@ public class UIButtonManager : MonoBehaviour
     }
     void SetInteractable(bool state)
     {
-        Btn_Back.GetComponent<Button>().interactable = state;
         Btn_Capture.GetComponent<Button>().interactable = state;
         Btn_GrowSlider.GetComponent<Button>().interactable = state;
         Btn_Detail.GetComponent<Button>().interactable = state;
     }
 
-    void ARTargetingValidCheck()
-    {   
-
-        
-        bool curState;
-
-        if(
-        Btn_Back.GetComponent<Button>().interactable &&
-        Btn_Capture.GetComponent<Button>().interactable &&
-        Btn_GrowSlider.GetComponent<Button>().interactable &&
-        Btn_Detail.GetComponent<Button>().interactable
-        )
-        {
-            curState = true;
-        }
-        else
-        {
-            curState = false;
-        }
-
-        if(curState != this.arTargetingState)
-        {
-            this.arTargetingState = curState;
-            this.arManager.GetComponent<ARButtonManager>().ARTargetingStateChanged(curState);
-        }
+    void SetARTargetingState(bool state)
+    {
+        this.arManager.GetComponent<ARButtonManager>().ARTargetingStateChanged(state);
     }
 }

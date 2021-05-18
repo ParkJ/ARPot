@@ -24,6 +24,7 @@ public class ARButtonManager : MonoBehaviour
 
     public event EventHandler SelectOn;
     public event EventHandler SelectOff;
+    public event EventHandler TargetLost;
 
     void Start()
     {
@@ -51,6 +52,11 @@ public class ARButtonManager : MonoBehaviour
         if(targetObjList.Contains(oldTarget))
         {
             targetObjList.Remove(oldTarget);
+        }
+
+        if(oldTarget.name == selectedTarget.name)
+        {
+            TargetLost(this, EventArgs.Empty);  
         }
     }
 
