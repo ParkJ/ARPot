@@ -35,6 +35,9 @@ public class UIButtonManager : MonoBehaviour
 
     private bool arTargetingState = true;
 
+
+    private bool isUIButtonClicked;
+
     public void Start()
     {
 
@@ -53,16 +56,15 @@ public class UIButtonManager : MonoBehaviour
     }
 
     void SelectOn(object sender, EventArgs e)
-    { 
-        Btn_GrowSlider.GetComponent<Button>().interactable = true;  
-        Btn_Detail.GetComponent<Button>().interactable = true;
+    {
+
+        SetInteractable(true);
     }
     void SelectOff(object sender, EventArgs e)
     {
         growthSliderObj.GetComponent<Slider>().value = 0;
         growthSliderObj.SetActive(false);
-        Btn_GrowSlider.GetComponent<Button>().interactable = false;
-        Btn_Detail.GetComponent<Button>().interactable = false;
+        SetInteractable(false);
     }
 
     void Update()
@@ -165,6 +167,8 @@ public class UIButtonManager : MonoBehaviour
 
     void ARTargetingValidCheck()
     {   
+
+        
         bool curState;
 
         if(
@@ -180,7 +184,6 @@ public class UIButtonManager : MonoBehaviour
         {
             curState = false;
         }
-
 
         if(curState != this.arTargetingState)
         {
