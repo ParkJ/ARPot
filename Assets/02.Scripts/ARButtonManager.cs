@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +21,9 @@ public class ARButtonManager : MonoBehaviour
     private Color tpColor;
 
     private bool arTargetingState = true;
+
+    public event EventHandler SelectOn;
+    public event EventHandler SelectOff;
 
     void Start()
     {
@@ -61,7 +65,6 @@ public class ARButtonManager : MonoBehaviour
         {
             GameObject nearestTarget = SearchTargetInArea();
             SelectedTargetUpdate(nearestTarget);
-
         }
     }
 
@@ -96,6 +99,8 @@ public class ARButtonManager : MonoBehaviour
                 SetSelectedTargetColor(this.selectedTarget, true);
 
                 GameObject.FindGameObjectWithTag("GAMEMANAGER").GetComponent<FBManager>().LoadData(this.selectedTarget.name);
+
+                SelectOn(this, EventArgs.Empty);
             }
             //When selection changed
             else if(this.selectedTarget.name != nearestTarget.name)
@@ -105,12 +110,15 @@ public class ARButtonManager : MonoBehaviour
                 SetSelectedTargetColor(this.selectedTarget, true);
 
                 GameObject.FindGameObjectWithTag("GAMEMANAGER").GetComponent<FBManager>().LoadData(this.selectedTarget.name);
+
+                SelectOn(this, EventArgs.Empty);
             }
         }
         else if(this.selectedTarget)
         {
             SetSelectedTargetColor(this.selectedTarget, false);
             this.selectedTarget = null;
+            SelectOff(this, EventArgs.Empty);
         }
     }
 
@@ -118,7 +126,6 @@ public class ARButtonManager : MonoBehaviour
     {
         if(isSelected)
         {
-            Debug.Log("a");
             obj.transform.Find("Canvas").transform.Find("Panel").GetComponent<Image>().color = new Color(this.tpColor.r, this.tpColor.g, this.tpColor.b, 0.8f);
         }
         else
@@ -135,12 +142,10 @@ public class ARButtonManager : MonoBehaviour
     {
         if(selectedTarget)
         {
-            Debug.Log("target true");
             float value = slider.GetComponent<Slider>().value;
             Image[] images = selectedTarget.transform.Find("Canvas").transform.Find("GrowingImgGroup").GetComponentsInChildren<Image>();
             GrowthImageTransparency(images, value);
         }
-        Debug.Log("target false");
     }
 
     void GrowthImageTransparency(Image[] images, float value)

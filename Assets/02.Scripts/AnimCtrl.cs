@@ -28,20 +28,10 @@ public class AnimCtrl : MonoBehaviour
 
     void WaterStateCheck()
     {
-        // if(gameManager.isWet != this.isWet)
-        // {
-        //     this.isWet = gameManager.isWet;
-        //     Debug.Log($"_isWet + {gameManager.isWet}");
-        //     StartCoroutine(AnimStateUpdate());
-        // }
 
-        //Debug.Log($"AnimCtlrIsWet : {gameManager.isWet}");
-
-        Debug.Log("Water State Check oN ->  this: " + this.isWet + "/ MGR : " + gameManager.isWet);
         if(this.isWet != gameManager.isWet)
         {
             this.isWet = gameManager.isWet;
-            Debug.Log("State Changed!!!!  -- " + this.isWet);
             StartCoroutine(AnimStateUpdate());
         }
 
@@ -53,14 +43,12 @@ public class AnimCtrl : MonoBehaviour
             //Turn Anim hash bool On and Rendering turn off 
             anim.SetBool(hashWaterOn, true);
             yield return new WaitForSeconds(2.0f);
-            Debug.Log("StartCoIsWet = true");
             SetAnimRendererState(this.anim, !isWet);
         }
         else
         {
             //Turn Anim hash bool Off and Rendering turn on.
             anim.SetBool(hashWaterOn, false);
-            Debug.Log("StartCoIsWet = false");
             SetAnimRendererState(this.anim, !isWet);
         }
         yield break;
@@ -70,12 +58,4 @@ public class AnimCtrl : MonoBehaviour
     {
         anim.transform.Find("Flower Pot Monster").gameObject.SetActive(state);
     }
-
-
-    // public void OnAnimClick()
-    // {
-    //     this.isWaterEnough = !this.isWaterEnough;
-    //     StartCoroutine(AnimStateUpdate());
-    // }
-
 }

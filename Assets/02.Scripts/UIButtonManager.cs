@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 using TMPro;
 
@@ -46,13 +47,28 @@ public class UIButtonManager : MonoBehaviour
         growthSliderObj.SetActive(false);
 
         arManager = GameObject.FindGameObjectWithTag("ARManager");
+
+        arManager.GetComponent<ARButtonManager>().SelectOn += new EventHandler(SelectOn);
+        arManager.GetComponent<ARButtonManager>().SelectOff += new EventHandler(SelectOff);
+    }
+
+    void SelectOn(object sender, EventArgs e)
+    { 
+        Btn_GrowSlider.GetComponent<Button>().interactable = true;  
+        Btn_Detail.GetComponent<Button>().interactable = true;
+    }
+    void SelectOff(object sender, EventArgs e)
+    {
+        growthSliderObj.GetComponent<Slider>().value = 0;
+        growthSliderObj.SetActive(false);
+        Btn_GrowSlider.GetComponent<Button>().interactable = false;
+        Btn_Detail.GetComponent<Button>().interactable = false;
     }
 
     void Update()
     {
         ARTargetingValidCheck();
     }
-
 
     public void OnTouchMenu()
     {
@@ -114,7 +130,6 @@ public class UIButtonManager : MonoBehaviour
     public void OnDetailExit()
     {
         SetInteractable(true);
-        Debug.Log("OnClick");
         DetailPanel.SetActive(false);
     }
 
@@ -125,7 +140,6 @@ public class UIButtonManager : MonoBehaviour
 
         if(data == null)
         {
-            Debug.Log("SetDetailPanelData fail");
             return false;
         }
 
