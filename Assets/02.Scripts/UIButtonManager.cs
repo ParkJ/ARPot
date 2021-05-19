@@ -55,7 +55,7 @@ public class UIButtonManager : MonoBehaviour
     }
 
     //Event : Called if Target selected.
-    void SelectOn(object sender, EventArgs e)g
+    void SelectOn(object sender, EventArgs e)
     {
         SetInteractable(true);
     }
