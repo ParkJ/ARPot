@@ -54,9 +54,12 @@ public class ARButtonManager : MonoBehaviour
             targetObjList.Remove(oldTarget);
         }
 
-        if(oldTarget.name == selectedTarget.name)
+        if(selectedTarget != null)
         {
-            TargetLost(this, EventArgs.Empty);  
+            if(oldTarget.name == selectedTarget.name)
+            {
+                TargetLost(this, EventArgs.Empty);  
+            }
         }
     }
 
@@ -104,9 +107,9 @@ public class ARButtonManager : MonoBehaviour
                 this.selectedTarget = nearestTarget;
                 SetSelectedTargetColor(this.selectedTarget, true);
 
+                SelectOn(this, EventArgs.Empty);
                 GameObject.FindGameObjectWithTag("GAMEMANAGER").GetComponent<FBManager>().LoadData(this.selectedTarget.name);
 
-                SelectOn(this, EventArgs.Empty);
             }
             //When selection changed
             else if(this.selectedTarget.name != nearestTarget.name)
@@ -115,9 +118,9 @@ public class ARButtonManager : MonoBehaviour
                 this.selectedTarget = nearestTarget;
                 SetSelectedTargetColor(this.selectedTarget, true);
 
+                SelectOn(this, EventArgs.Empty);
                 GameObject.FindGameObjectWithTag("GAMEMANAGER").GetComponent<FBManager>().LoadData(this.selectedTarget.name);
 
-                SelectOn(this, EventArgs.Empty);
             }
         }
         else if(this.selectedTarget)
