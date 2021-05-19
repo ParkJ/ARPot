@@ -55,14 +55,14 @@ public class UIButtonManager : MonoBehaviour
     }
 
     //Event : Called if Target selected.
-    void SelectOn(object sender, EventArgs e)
+    void SelectOn(object sender, EventArgs e)g
     {
         SetInteractable(true);
     }
     //Event : Called if there's no selected target.
     void SelectOff(object sender, EventArgs e)
     {
-        growthSliderObj.GetComponent<Slider>().value = 0;
+        growthSliderObj.GetComponentInChildren<Slider>().value = 0;
         growthSliderObj.SetActive(false);
         SetInteractable(false);
     }
@@ -71,7 +71,7 @@ public class UIButtonManager : MonoBehaviour
     {
         DetailPanel.SetActive(false);
         growthSliderObj.SetActive(false);
-        growthSliderObj.GetComponent<Slider>().value = 0;
+        growthSliderObj.GetComponentInChildren<Slider>().value = 0;
         SNSPanel.SetActive(false);
         menuDetail.SetActive(true);
         SetARTargetingState(true);
@@ -147,7 +147,7 @@ public class UIButtonManager : MonoBehaviour
         // set AR targeting state true
         SetARTargetingState(true);
         
-        growthSliderObj.GetComponent<Slider>().value = 0;
+        growthSliderObj.GetComponentInChildren<Slider>().value = 0;
         targetUIObj.SetActive(false);
         menuDetail.SetActive(true);
     }
