@@ -21,7 +21,6 @@ public class AnimCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         WaterStateCheck();
     }
 
@@ -34,8 +33,8 @@ public class AnimCtrl : MonoBehaviour
             this.isWet = gameManager.isWet;
             StartCoroutine(AnimStateUpdate());
         }
-
     }
+    
     IEnumerator AnimStateUpdate()
     {
         if (this.isWet)
