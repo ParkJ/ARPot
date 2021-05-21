@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
+        Debug.Log("BT_Debug :: void Start");
+
         deviceName = "AR"; //bluetooth should be turned ON;
         try
         {
@@ -52,10 +54,12 @@ public class GameManager : MonoBehaviour
                 //scanning is mandatory before connecting for BLE.
 
             }
+            
+            Debug.Log($"BT_Debug void start work");
         }
         catch (Exception ex)
         {
-            Debug.Log(ex.Message);
+            Debug.Log($"BT_Debug void start Not work {ex.Message}");
             write(ex.Message);
         }
     }
@@ -73,10 +77,10 @@ public class GameManager : MonoBehaviour
 
     public void OnMessageReceived()
     {
+        Debug.Log("It's received_message!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         received_message = bluetoothHelper.Read();
-        // Debug.Log(received_message);
-        // Debug.Log("It's received_message!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        // write( received_message);
+        Debug.Log($"BT_Debug : {received_message}");
+        write(received_message);
 
         if (received_message.Contains("ON")) 
         {
